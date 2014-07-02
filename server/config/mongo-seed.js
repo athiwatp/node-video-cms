@@ -1,7 +1,9 @@
 'use strict';
 
 var mongo = require('./mongo'),
-    ObjectID = mongo.ObjectID;
+    ObjectID = mongo.ObjectID,
+    videos = require('../json/videos.json'),
+    categories = require('../json/categories.json');
 
 /**
  * Populates the database with seed data.
@@ -9,6 +11,7 @@ var mongo = require('./mongo'),
  */
 module.exports = function *(overwrite) {
   var count = yield mongo.users.count({}, {limit: 1});
+  //overwrite = true;
   if (overwrite || count === 0) {
 
     // first remove any leftover data in collections
@@ -25,10 +28,14 @@ module.exports = function *(overwrite) {
       }
     }
 
+    console.log(videos);
+
     // now populate collections with fresh data
     yield mongo.counters.insert({_id: 'userId', seq: users.length});
     yield mongo.users.insert(users);
     yield mongo.posts.insert(posts);
+    yield mongo.videos.insert(videos);
+    yield mongo.categories.insert(categories);
   }
 };
 
