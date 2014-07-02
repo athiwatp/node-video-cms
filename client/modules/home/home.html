@@ -1,1 +1,6 @@
-{{videos}}
+<ul class="video-list">
+  <li ng-repeat="video in videos">
+    <img src="{{video.yt_thumb}}" />
+    <span>{{video.video_title}}</span>
+  </li>
+</ul>
