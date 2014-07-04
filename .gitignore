@@ -34,3 +34,5 @@ logs/*
 
 .idea/
 node-video-cms.iml
+
+.nodemon

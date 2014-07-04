@@ -8,7 +8,8 @@ angular
   .module('nodeVideoCMS.home',[
     'ngRoute',
     'monospaced.elastic',
-    'nodeVideoCMS.common'
+    'nodeVideoCMS.common',
+    'ui.bootstrap'
   ])
   .config(['$routeProvider', function($routeProvider){
     $routeProvider.when("/",

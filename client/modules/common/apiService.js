@@ -10,10 +10,14 @@ angular.module('nodeVideoCMS.common').factory('api', function($rootScope, $http,
 
   //api http endpoints
   api.videos = {
-    list: function() {
+    list: function(start, end) {
+      var url = apiBase + '/videos';
+      if(start !== undefined && end !== undefined) {
+        url+= '/' + start + '-' + end;
+      }
       return $http({
         method: 'GET',
-        url: apiBase + '/videos'
+        url: url
       });
     }
   }
