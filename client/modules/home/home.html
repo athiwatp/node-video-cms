@@ -1,7 +1,7 @@
 <div>
   <ul class="video-list">
     <li class="col-md-3" ng-repeat="video in videos">
-      <a href="#">
+      <a ng-href="/watch/{{video._id}}">
         <img src="{{video.yt_thumb}}" />
         <span>{{video.video_title}}</span>
       </a>

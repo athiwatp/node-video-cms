@@ -5,7 +5,7 @@
  */
 
 angular.module('nodeVideoCMS.common').factory('api', function($rootScope, $http, $window) {
-  var apiBase = 'api',
+  var apiBase = '/api',
     api = {events: {}};
 
   //api http endpoints
@@ -15,6 +15,13 @@ angular.module('nodeVideoCMS.common').factory('api', function($rootScope, $http,
       if(start !== undefined && end !== undefined) {
         url+= '/' + start + '-' + end;
       }
+      return $http({
+        method: 'GET',
+        url: url
+      });
+    },
+    get: function(id) {
+      var url = apiBase + '/video/' + id;
       return $http({
         method: 'GET',
         url: url
