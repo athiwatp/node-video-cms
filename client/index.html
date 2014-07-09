@@ -20,13 +20,12 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/" ng-bind="common.title">Node Video CMS</a>
+        <a class="navbar-brand" href="/">Node Video CMS</a>
       </div>
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="/">Home</a></li>
-          <li><a href="/videos">Videos</a></li>
-          <li><a href="/movies">Movies</a></li>
+          <li ng-class="common.active.videos"><a href="/videos">Videos</a></li>
+          <li ng-class="common.active.movies"><a href="/movies">Movies</a></li>
         </ul>
       </div><!--/.nav-collapse -->
     </div>
@@ -55,5 +54,9 @@
   <script src="/modules/home/homeController.js"></script>
   <script src="/modules/watch/watch.js"></script>
   <script src="/modules/watch/watchController.js"></script>
+  <script src="/modules/videos/videos.js"></script>
+  <script src="/modules/videos/videosController.js"></script>
+  <script src="/modules/movies/movies.js"></script>
+  <script src="/modules/movies/moviesController.js"></script>
 </body>
 </html>

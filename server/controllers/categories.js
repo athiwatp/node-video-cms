@@ -15,6 +15,7 @@ exports.init = function (app) {
 };
 
 function *listCategories() {
-  var categories = yield mongo.categories.find().toArray();
+  var categories = yield mongo.categories.find()
+    .sort({name: 1}).toArray();
   this.body = categories;
 };

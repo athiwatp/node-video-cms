@@ -29,6 +29,23 @@ angular.module('nodeVideoCMS.common').factory('api', function($rootScope, $http,
     }
   }
 
+  api.categories = {
+    list: function() {
+      var url = apiBase + '/categories';
+      return $http({
+        method: 'GET',
+        url: url
+      });
+    },
+    get: function(id) {
+      var url = apiBase + '/categories/' + id;
+      return $http({
+        method: 'GET',
+        url: url
+      });
+    }
+  }
+
   return api;
 
 });

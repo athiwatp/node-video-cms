@@ -1,0 +1,43 @@
+<div class="row">
+  <!-- sidebar -->
+  <div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
+    <ul class="nav">
+      <li ng-repeat="category in categories">
+        <a href="#" class="active">
+          {{category.name}}
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- main area -->
+  <div class="col-xs-12 col-sm-10">
+    <div>
+      <ul class="video-list">
+        <li class="col-md-3" ng-repeat="video in videos">
+          <a ng-href="/watch/{{video._id}}">
+            <img src="{{video.yt_thumb}}" />
+            <span>{{video.video_title}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="text-center">
+      <pagination total-items="totalItems"
+                  ng-model="currentPage"
+                  max-size="maxSize"
+                  class="pagination-sm"
+                  boundary-links="false"
+                  rotate="false"
+                  num-pages="numPages"
+                  ng-change="pageChanged()">
+      </pagination>
+    </div>
+  </div>
+
+</div>
+
+
+
+
