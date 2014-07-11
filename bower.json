@@ -10,7 +10,7 @@
     "angular-route": "~1",
     "angular-elastic": "~2",
     "angular-bootstrap": "~0.11.0",
-    "ng-videosharing-embed": "~0.2.1",
+    "google-youtube": "~0.0.2",
     "lodash": "~2"
   },
   "devDependencies": {

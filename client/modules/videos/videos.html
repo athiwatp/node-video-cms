@@ -3,7 +3,7 @@
   <div class="col-xs-6 col-sm-2 sidebar-offcanvas" id="sidebar" role="navigation">
     <ul class="nav">
       <li ng-repeat="category in categories">
-        <a href="#" class="active">
+        <a ng-href="/videos/{{category.id}}">
           {{category.name}}
         </a>
       </li>

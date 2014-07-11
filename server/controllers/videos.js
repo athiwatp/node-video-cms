@@ -12,24 +12,32 @@ var route = require('koa-route'),
 // register koa routes
 exports.init = function (app) {
   console.log('videos init');
-  app.use(route.get('/api/videos', listAllVideos));
+  app.use(route.get('/api/videos', listVideos));
   app.use(route.get('/api/videos/:start-:end', listVideos));
+  app.use(route.get('/api/videos/:start-:end/:criteria', listVideos));
   app.use(route.get('/api/video/:id', getVideo));
 };
 
-function *listAllVideos() {
-  var videos = yield mongo.videos.find(
-    {},
-    {limit: 12, skip: 0}
-  ).toArray();
-  this.body = videos;
-};
 
+function *listVideos(start, end, criteria) {
+  var projection = {};
 
-function *listVideos(start, end) {
+  if(!criteria) {
+    criteria = {};
+  } else {
+    criteria = JSON.parse(decodeURIComponent(criteria));
+  }
+
+  if(start !== undefined && end !== undefined) {
+    projection = {
+      limit: end - start,
+      skip: start
+    };
+  }
+
   var videos = yield mongo.videos.find(
-    {},
-    {limit: end - start, skip: start}
+    criteria,
+    projection
   ).toArray();
   this.body = videos;
 };

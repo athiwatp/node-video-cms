@@ -12,10 +12,13 @@ angular
     'ui.bootstrap'
   ])
   .config(['$routeProvider', function($routeProvider){
-    $routeProvider.when("/videos",
-      {
-        templateUrl: "modules/videos/videos.html",
-        controller: "VideosCtrl"
-      }
-    );
+    $routeProvider
+      .when('/videos', {
+        templateUrl: 'modules/videos/videos.html',
+        controller: 'VideosCtrl'
+      })
+      .when('/videos/:categoryID', {
+        templateUrl: 'modules/videos/videos.html',
+        controller: 'VideosCtrl'
+      })
   }]);
