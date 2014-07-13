@@ -5,10 +5,22 @@
  */
 
 angular.module("nodeVideoCMS.movies").controller("MoviesCtrl", function($scope, api){
-  var videosPerPage = 12;
+  var videosPerPage = 12,
+    criteria;
 
-  api.videos.list(0, videosPerPage).success(function (videos) {
-    $scope.videos = videos;
+  api.categories.list().success(function (categories) {
+    angular.forEach(categories, function(category){
+      if(category.name === 'Movies') {
+        criteria = {
+          category: parseInt(category.id)
+        }
+      }
+      api.videos.list(0, videosPerPage, criteria).success(function (videos) {
+        $scope.videos = videos;
+      });
+    });
+
+
   });
 
   $scope.maxSize = 5;
@@ -18,7 +30,7 @@ angular.module("nodeVideoCMS.movies").controller("MoviesCtrl", function($scope, 
   $scope.pageChanged = function() {
     var start = videosPerPage * ($scope.currentPage - 1),
         end = videosPerPage * $scope.currentPage;
-    api.videos.list(start, end).success(function (videos) {
+    api.videos.list(start, end, criteria).success(function (videos) {
       $scope.videos = videos;
     });
   };
