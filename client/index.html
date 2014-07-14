@@ -27,6 +27,12 @@
           <li ng-class="common.active.videos"><a href="/videos">Videos</a></li>
           <li ng-class="common.active.movies"><a href="/movies">Movies</a></li>
         </ul>
+        <form role="search" class="navbar-form navbar-right" ng-submit="searchVideos()">
+          <div class="form-group right-inner-addon">
+            <i class="glyphicon glyphicon-search" ng-click="searchVideos()"></i>
+            <input type="text" placeholder="Search" ng-model="searchText" class="form-control">
+          </div>
+        </form>
       </div><!--/.nav-collapse -->
     </div>
   </div>
@@ -53,6 +59,8 @@
   <script src="/modules/common/apiService.js"></script>
   <script src="/modules/home/home.js"></script>
   <script src="/modules/home/homeController.js"></script>
+  <script src="/modules/search/search.js"></script>
+  <script src="/modules/search/searchController.js"></script>
   <script src="/modules/watch/watch.js"></script>
   <script src="/modules/watch/watchController.js"></script>
   <script src="/modules/videos/videos.js"></script>

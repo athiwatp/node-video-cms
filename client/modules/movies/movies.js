@@ -14,7 +14,7 @@ angular
   .config(['$routeProvider', function($routeProvider){
     $routeProvider.when("/movies",
       {
-        templateUrl: "modules/movies/movies.html",
+        templateUrl: "/modules/movies/movies.html",
         controller: "MoviesCtrl"
       }
     );

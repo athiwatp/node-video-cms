@@ -14,7 +14,7 @@ angular
   .config(['$routeProvider', function($routeProvider){
     $routeProvider.when("/",
       {
-        templateUrl: "modules/home/home.html",
+        templateUrl: "/modules/home/home.html",
         controller: "HomeCtrl"
       }
     );

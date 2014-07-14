@@ -18,7 +18,7 @@ angular
         controller: 'VideosCtrl'
       })
       .when('/videos/:categoryID', {
-        templateUrl: 'modules/videos/videos.html',
+        templateUrl: '/modules/videos/videos.html',
         controller: 'VideosCtrl'
       })
   }]);

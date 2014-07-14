@@ -26,6 +26,12 @@ function *listVideos(start, end, criteria) {
     criteria = {};
   } else {
     criteria = JSON.parse(decodeURIComponent(criteria));
+
+    for(var condKey in criteria) {
+      if(condKey === 'video_title') {
+        criteria[condKey] = new RegExp(criteria[condKey], 'i');
+      }
+    }
   }
 
   if(start !== undefined && end !== undefined) {
