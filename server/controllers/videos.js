@@ -28,8 +28,16 @@ function *listVideos(start, end, criteria) {
     criteria = JSON.parse(decodeURIComponent(criteria));
 
     for(var condKey in criteria) {
-      if(condKey === 'video_title') {
-        criteria[condKey] = new RegExp(criteria[condKey], 'i');
+      if(condKey === 'searchText') {
+        criteria = {
+          $or : [{
+            video_title : new RegExp(criteria[condKey], 'i')
+          }, {
+            description : new RegExp(criteria[condKey], 'i')
+          }]
+        }
+
+        break;
       }
     }
   }

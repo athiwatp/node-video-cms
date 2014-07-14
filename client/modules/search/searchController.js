@@ -10,7 +10,7 @@ angular.module("nodeVideoCMS.search").controller("SearchCtrl", function($scope, 
 
   if($routeParams && $routeParams.searchText) {
     criteria = {
-      video_title: $routeParams.searchText
+      searchText : $routeParams.searchText
     };
 
     $rootScope.searchText = $scope.searchText = $routeParams.searchText;
