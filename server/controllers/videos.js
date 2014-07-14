@@ -49,11 +49,16 @@ function *listVideos(start, end, criteria) {
     };
   }
 
-  var videos = yield mongo.videos.find(
+  var videosCursor = mongo.videos.find(
     criteria,
     projection
-  ).toArray();
-  this.body = videos;
+  );
+  var count = yield videosCursor.count();
+  var videos = yield videosCursor.toArray();
+  this.body = {
+    total_record_count : count,
+    records : videos
+  };
 };
 
 function *getVideo(id) {
