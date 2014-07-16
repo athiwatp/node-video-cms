@@ -36,11 +36,16 @@ module.exports = function (app) {
     yield send(this, '/index.html', sendOpts);
   });
 
-  // middleware below this line is only reached if jwt token is valid
-  //app.use(jwt({secret: config.app.secret}));
-
   // mount all the routes defined in the api controllers
   fs.readdirSync('./server/controllers').forEach(function (file) {
     require('../controllers/' + file).init(app);
   });
+
+  // middleware below this line is only reached if jwt token is valid
+  app.use(jwt({secret: config.app.secret}));
+
+
+  // mount all the admin routes defined in the api controllers
+
+
 };

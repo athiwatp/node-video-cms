@@ -19,7 +19,7 @@ module.exports = app;
 app.init = co(function *() {
     // initialize mongodb and populate the database with seed data if empty
     yield mongo.connect();
-    yield mongoSeed();
+    yield mongoSeed(true);
 
     // koa config
     koaConfig(app);

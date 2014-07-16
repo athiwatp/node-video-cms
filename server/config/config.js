@@ -25,8 +25,8 @@ var platformConfig = {
         },
         oauth: {
             facebook: {
-                clientId: '231235687068678',
-                clientSecret: '4a90381c6bfa738bb18fb7d6046c14b8',
+                clientId: '366810216699732',
+                clientSecret: 'a1bbecb6cd5fee3effc4ebb1fdb0ddb4',
                 callbackUrl: 'http://localhost:3000/signin/facebook/callback'
             },
             google: {
