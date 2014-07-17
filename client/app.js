@@ -17,18 +17,60 @@ angular.module("nodeVideoCMS", [
 
   })
   .run(function ($location, $rootScope, $window, $route, api) {
-    var common = $rootScope.common = $rootScope.common || {
-      title : 'Node Video CMS',
-      active: {}
-    },
-    defaultTitle = 'Node Video CMS';
 
-    $rootScope.searchText = '';
-    $rootScope.searchVideos = function() {
-      if($rootScope.searchText) {
-        $location.url('/search/' + $rootScope.searchText);
-      }
+    // if user logs in with oauth, user token will be in query string so look for it. otherwise, check browser storage for token
+    var tokenParamMatch = RegExp('[?&]user=([^&]*)').exec(window.location.search),
+      tokenParam = tokenParamMatch && decodeURIComponent(tokenParamMatch[1].replace(/\+/g, ' '));
+    if (tokenParam) {
+      var data = JSON.parse(tokenParam);
+      window.localStorage.token = data.token;
+      window.localStorage.user = JSON.stringify(data.user);
     }
+
+    var userString = $window.sessionStorage.user || $window.localStorage.user,
+      common = $rootScope.common = $rootScope.common || {
+        title : 'Node Video CMS',
+        active: {},
+        user: userString ? JSON.parse(userString) : undefined,
+        username: '',
+        password: '',
+        remeberMe: true,
+        signIn: function() {
+          $.ajax({
+            type: 'POST',
+            url: '/signin',
+            data: JSON.stringify({
+              email: $rootScope.common.username,
+              password: $rootScope.common.password
+            }),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: function (data) {
+              var storage = $rootScope.common.remeberMe ? window.localStorage : window.sessionStorage;
+              storage.token = data.token;
+              storage.user = JSON.stringify(data.user);
+              window.location.replace('/');
+            },
+            error: function (res) {
+              $('form p.help-block').text(res.responseText);
+            }
+          });
+        },
+        signOut: function () {
+          delete $window.sessionStorage.token;
+          delete $window.sessionStorage.user;
+          delete $window.localStorage.token;
+          delete $window.localStorage.user;
+          $window.location.replace('/');
+        },
+        searchText:  '',
+        searchVideos: function() {
+          if(common.searchText) {
+            $location.url('/search/' + common.searchText);
+          }
+        }
+      },
+      defaultTitle = 'Node Video CMS';
 
     // set actions to be taken each time the user navigates
     $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {
