@@ -6,53 +6,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" href="/admin/css/admin.css">
 
   <script src="../bower_components/platform/platform.js"></script>
-  <link rel="import" href="../bower_components/core-menu/core-menu.html">
-  <link rel="import" href="../bower_components/core-item/core-item.html">
-  <link rel="import" href="../bower_components/core-scaffold/core-scaffold.html">
-  <link rel="import" href="../bower_components/core-icons/core-icons.html">
-  <link rel="import" href="../bower_components/sampler-scaffold/sampler-scaffold.html">
-
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-
-    body {
-      font-family: sans-serif;
-    }
-
-    core-scaffold {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-    }
-
-    .content {
-      background-color: #fff;
-      height: 5000px;
-      padding: 20px;
-    }
-
-  </style>
+  <link rel="import" href="../bower_components/polymer/polymer.html">
+  <link rel="import" href="elements/app-drawer.html">
+  <link rel="import" href="elements/site-banner.html">
+  <link rel="import" href="elements/scroll-area.html">
+  <link rel="import" href="elements/admin-menu.html">
+  <link rel="import" href="elements/app-bar.html">
 
 </head>
 
 <body unresolved>
 
-<sampler-scaffold label="Node Video CMS Admin">
+<main id="content-container">
 
-  <core-item label="String" url="demos/string.html"></core-item>
-  <core-item label="Checkbox" url="demos/checkbox.html"></core-item>
-  <core-item label="Radio" url="demos/radio.html"></core-item>
-  <core-item label="Range" url="demos/range.html"></core-item>
-  <core-item label="Color" url="demos/color.html"></core-item>
+  <app-drawer id="sidebar" unresolved>
+    <polymer-flex-layout id="logo-container" isContainer align="center">
+      <a href="/admin/index.html" class="logo">Node Video CMS Admin</a>
+      <polymer-ui-icon id="dropdown-toggle" size="35" src="/images/picons/ic_arrowDropDown_dark_.png">
+      </polymer-ui-icon>
+    </polymer-flex-layout>
 
-</sampler-scaffold>
+    <admin-menu unresolved menu="elements"></admin-menu>
+  </app-drawer>
+
+  <scroll-area sidebar unresolved>
+    <site-banner type="elements" navgroup="elements" shortname="Elements" unresolved>
+
+      <app-bar theme="light" class="bar fixed" unresolved>
+        <a href="/docs/start/tutorial/intro.html" class="paper-button " borderless sink>Learn</a>
+        <a href="/docs/elements/" class="paper-button active" borderless sink>Elements</a>
+        <a href="/resources/faq.html" class="paper-button " borderless sink>Resources</a>
+      </app-bar>
+
+      <header>
+        <h1>Node Video CMS</h1>
+
+        <summary>Dashboard</summary>
+
+      </header>
+    </site-banner>
+
+    <div style="min-height: 1500px">
+
+    </div>
+
+
+
+   </scroll-area>
+
+
+ </main>
 
 </body>
 

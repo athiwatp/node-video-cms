@@ -1,0 +1,113 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymer-ui-menu/polymer-ui-menu.html">
+<link rel="import" href="../../bower_components/polymer-ui-menu-item/polymer-ui-menu-item.html">
+<link rel="import" href="../../bower_components/polymer-ui-submenu-item/polymer-ui-submenu-item.html">
+<!-- <link rel="import" href="ui-color-icon.html"> -->
+
+<polymer-element name="admin-menu" attributes="menu ajaxify coreElements paperElements">
+<template>
+  <link rel="stylesheet" href="/admin/css/elements/admin-menu.css">
+  <polymer-ui-menu id="mainmenu" on-click="{{onClick}}" selectedItem="{{item}}">
+
+    <polymer-ui-menu-item href="/docs/elements/layout-elements.html"
+                          src="/admin/images/picons/ic_polymer_source.svg"
+                          class="elements-using  {{ {show: menu == 'elements'} | tokenList}}">Dashboard</polymer-ui-menu-item>
+
+    <polymer-ui-submenu-item src="/admin/images/picons/ic_video_dark_.png"
+                             class="elements-using  {{ {show: menu == 'elements'} | tokenList}}"
+                             label="Videos">
+      <polymer-ui-menu-item href="/docs/elements/layout-elements.html">Add Video From URL</polymer-ui-menu-item>
+      <polymer-ui-menu-item href="/docs/elements/icons.html">Add Video Stream</polymer-ui-menu-item>
+      <polymer-ui-menu-item href="/docs/elements/material.html">Import from Youtube</polymer-ui-menu-item>
+
+      <polymer-ui-menu-item href="/docs/elements/material.html">Import from Youtube User</polymer-ui-menu-item>
+      <polymer-ui-menu-item href="/docs/elements/material.html">Embed Video</polymer-ui-menu-item>
+      <polymer-ui-menu-item href="/docs/elements/material.html">Reported Videos</polymer-ui-menu-item>
+      <polymer-ui-menu-item href="/docs/elements/material.html">Approve Videos</polymer-ui-menu-item>
+    </polymer-ui-submenu-item>
+
+
+  </polymer-ui-menu>
+</template>
+<script>
+  Polymer('admin-menu', {
+    ajaxify: false,
+    isReady: false,
+    coreElements: {},
+    paperElements: {},
+    created: function() {
+      this.coreElementsList = [];
+      this.paperElementsList = [];
+    },
+    domReady: function() {
+      this.isReady = true;
+      this.async(this.menuChanged);
+    },
+    coreElementsChanged: function() {
+      for (var name in this.coreElements) {
+        this.coreElementsList.push({name: name, url: this.coreElements[name]});
+      }
+    },
+    paperElementsChanged: function() {
+      for (var name in this.paperElements) {
+        this.paperElementsList.push({name: name, url: this.paperElements[name]});
+      }
+    },
+    menuChanged: function() {
+      if (this.isReady && this.coreElementsList.length &&
+          this.paperElementsList.length) {
+        this.highlightItemWithCurrentURL();
+      }
+    },
+    highlightItemWithCurrentURL: function(opt_href) {
+      var href = opt_href || location.pathname + location.hash;
+
+      if (href.match(/\/articles\//)) {
+        this.$.mainmenu.selected = this.$.mainmenu.items.indexOf(this.$.articles);
+        return;
+      } else if (href.match(/core-elements.html$/)) {
+        this.$.mainmenu.selected = this.$.mainmenu.items.indexOf(this.$.coreelements);
+        return;
+      } else if (href.match(/paper-elements.html$/)) {
+        this.$.mainmenu.selected = this.$.mainmenu.items.indexOf(this.$.paperelements);
+        return;
+      }
+
+      // If href wasn't found, look for a corresponding data-href. This is hacky
+      // but the first querySelector will fail because the elements' urls are
+      // /docs/elements/core-elements.html#{{name}}.
+      var item = this.shadowRoot.querySelector('[href$="' + href + '"]');
+      if (!item) {
+        item = this.shadowRoot.querySelector('[data-href$="' + href + '"]');
+      }
+
+      if (item) {
+        var submenu = item.parentElement;
+
+        submenu.selected = submenu.items.indexOf(item);
+
+        // Selected item is not a submenu. Keep it selected and quit early.
+        if (submenu == this.$.mainmenu) {
+          return;
+        }
+
+        if (submenu.parentElement && submenu.parentElement.localName == 'polymer-ui-submenu-item') {
+          do {
+            submenu.parentElement.selected = submenu.parentElement.items.indexOf(submenu);
+            submenu = submenu.parentElement;
+          } while (submenu && submenu.localName == 'polymer-ui-submenu-item');
+        } else {
+          this.$.mainmenu.selected = this.$.mainmenu.items.indexOf(submenu);
+        }
+      }
+    },
+    onClick: function(e, detail, sender) {
+      if (e.target.localName == 'polymer-ui-menu-item' && this.ajaxify) {
+        this.fire('click', {link: e.target});
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }
+  });
+</script>
+</polymer-element>
