@@ -8,17 +8,17 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="stylesheet" href="/admin/css/admin.css">
 
-  <script src="../bower_components/platform/platform.js"></script>
-  <link rel="import" href="../bower_components/polymer/polymer.html">
-  <link rel="import" href="elements/app-drawer.html">
-  <link rel="import" href="elements/site-banner.html">
-  <link rel="import" href="elements/scroll-area.html">
-  <link rel="import" href="elements/admin-menu.html">
-  <link rel="import" href="elements/app-bar.html">
+  <script src="/bower_components/platform/platform.js"></script>
+  <link rel="import" href="/bower_components/polymer/polymer.html">
+  <link rel="import" href="/admin/elements/app-drawer.html">
+  <link rel="import" href="/admin/elements/site-banner.html">
+  <link rel="import" href="/admin/elements/scroll-area.html">
+  <link rel="import" href="/admin/elements/admin-menu.html">
+  <link rel="import" href="/admin/elements/app-bar.html">
 
 </head>
 
-<body unresolved>
+<body unresolved ng-app="nodeVideoCMSAdmin">
 
 <main id="content-container">
 
@@ -48,7 +48,9 @@
     </site-banner>
 
     <div style="min-height: 1500px">
-
+      <div ng-view>
+        {{common.title}}
+      </div>
     </div>
 
 
@@ -57,6 +59,19 @@
 
 
  </main>
+
+
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/lodash/dist/lodash.js"></script>
+<script src="/bower_components/angular/angular.js"></script>
+<script src="/bower_components/angular-route/angular-route.js"></script>
+<script src="/bower_components/angular-elastic/elastic.js"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="/admin/js/app.js"></script>
+<script src="/admin/modules/home/home.js"></script>
+<script src="/admin/modules/home/homeController.js"></script>
+
 
 </body>
 

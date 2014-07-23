@@ -32,6 +32,13 @@ module.exports = function (app) {
     if (yield send(this, this.path, sendOpts)) {
       return;
     }
+
+    //Handle Admin page
+    if (this.path.substr(0, 6).toLowerCase() === '/admin') {
+      yield send(this, '/admin/index.html', sendOpts);
+      return;
+    }
+
     // if given path didn't match any file, just let angular handle the routing
     yield send(this, '/index.html', sendOpts);
   });
