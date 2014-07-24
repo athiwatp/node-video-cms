@@ -9,9 +9,13 @@
   <link rel="stylesheet" href="/admin/css/elements/admin-menu.css">
   <polymer-ui-menu id="mainmenu" on-click="{{onClick}}" selectedItem="{{item}}">
 
-    <polymer-ui-menu-item href="/docs/elements/layout-elements.html"
+    <polymer-ui-menu-item href="/admin"
+                          label="Dashboard"
                           src="/admin/images/picons/ic_polymer_source.svg"
-                          class="elements-using  {{ {show: menu == 'elements'} | tokenList}}">Dashboard</polymer-ui-menu-item>
+                          class="elements-using  {{ {show: menu == 'elements'} | tokenList}}">
+
+      <a href="/admin"></a>
+    </polymer-ui-menu-item>
 
     <polymer-ui-submenu-item src="/admin/images/picons/ic_video_dark_.png"
                              class="elements-using  {{ {show: menu == 'elements'} | tokenList}}"
@@ -102,6 +106,7 @@
       }
     },
     onClick: function(e, detail, sender) {
+      debugger;
       if (e.target.localName == 'polymer-ui-menu-item' && this.ajaxify) {
         this.fire('click', {link: e.target});
         e.preventDefault();

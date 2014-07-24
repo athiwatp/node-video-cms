@@ -7,6 +7,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="stylesheet" href="/admin/css/admin.css">
+  <link rel="stylesheet" href="/admin/css/polymer.css">
 
   <script src="/bower_components/platform/platform.js"></script>
   <link rel="import" href="/bower_components/polymer/polymer.html">
@@ -47,17 +48,10 @@
       </header>
     </site-banner>
 
-    <div style="min-height: 1500px">
-      <div ng-view>
-        {{common.title}}
-      </div>
+    <div ng-view class="admin-content">
     </div>
 
-
-
    </scroll-area>
-
-
  </main>
 
 
