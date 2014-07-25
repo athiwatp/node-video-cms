@@ -13,21 +13,19 @@
                           label="Dashboard"
                           src="/admin/images/picons/ic_polymer_source.svg"
                           class="elements-using  {{ {show: menu == 'elements'} | tokenList}}">
-
-      <a href="/admin"></a>
     </polymer-ui-menu-item>
 
     <polymer-ui-submenu-item src="/admin/images/picons/ic_video_dark_.png"
                              class="elements-using  {{ {show: menu == 'elements'} | tokenList}}"
                              label="Videos">
-      <polymer-ui-menu-item href="/docs/elements/layout-elements.html">Add Video From URL</polymer-ui-menu-item>
-      <polymer-ui-menu-item href="/docs/elements/icons.html">Add Video Stream</polymer-ui-menu-item>
-      <polymer-ui-menu-item href="/docs/elements/material.html">Import from Youtube</polymer-ui-menu-item>
+      <polymer-ui-menu-item href="/admin/addvideo">Add Video From URL</polymer-ui-menu-item>
+      <polymer-ui-menu-item href="/admin/streamvideo">Add Video Stream</polymer-ui-menu-item>
+      <polymer-ui-menu-item href="/admin/importvideo">Import from Youtube</polymer-ui-menu-item>
 
-      <polymer-ui-menu-item href="/docs/elements/material.html">Import from Youtube User</polymer-ui-menu-item>
-      <polymer-ui-menu-item href="/docs/elements/material.html">Embed Video</polymer-ui-menu-item>
-      <polymer-ui-menu-item href="/docs/elements/material.html">Reported Videos</polymer-ui-menu-item>
-      <polymer-ui-menu-item href="/docs/elements/material.html">Approve Videos</polymer-ui-menu-item>
+      <polymer-ui-menu-item href="/admin/importfromuser">Import from Youtube User</polymer-ui-menu-item>
+      <polymer-ui-menu-item href="/admin/embedvideo">Embed Video</polymer-ui-menu-item>
+      <polymer-ui-menu-item href="/admin/reportedvideos">Reported Videos</polymer-ui-menu-item>
+      <polymer-ui-menu-item href="/admin/approvevideos">Approve Videos</polymer-ui-menu-item>
     </polymer-ui-submenu-item>
 
 
@@ -106,7 +104,6 @@
       }
     },
     onClick: function(e, detail, sender) {
-      debugger;
       if (e.target.localName == 'polymer-ui-menu-item' && this.ajaxify) {
         this.fire('click', {link: e.target});
         e.preventDefault();
