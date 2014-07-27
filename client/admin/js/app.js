@@ -3,7 +3,8 @@
 angular.module("nodeVideoCMSAdmin", [
   'ngRoute',
   'nodeVideoCMSAdmin.home',
-  'nodeVideoCMSAdmin.video'
+  'nodeVideoCMSAdmin.video',
+  'nodeVideoCMSAdmin.categories'
 ])
   .config(function($routeProvider, $locationProvider){
     $locationProvider.html5Mode(true);
